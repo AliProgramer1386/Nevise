@@ -138,7 +138,7 @@ def model_inference(model, data, topk, DEVICE, BATCH_SIZE=16, vocab_=None):
         line_index += len(batch_clean_sentences)
 
     ###print(f"\nEpoch {None} valid_loss: {valid_loss / (batch_id + 1)}")
-    inf_time = time.time() - inference_st_time)
+    inf_time = time.time() - inference_st_time
     ###print("###############################################")
     
     return results, inf_time
