@@ -72,7 +72,7 @@ def correct_three_texts(model, vocab, device, normalizer, text1, text2, text3):
     corrected_text2, time_2 = spell_checking_on_sents(model, vocab, device, normalizer, text2)
     corrected_text3, time_3 = spell_checking_on_sents(model, vocab, device, normalizer, text3)
 
-    ptint(f"Nevise Spell Checking Proccess Done. Inference time: {time_1 + time_2 + time_3} seconds. Outputs: (({corrected_text1}, {corrected_text2}, {corredcted_text3}))")
+    print(f"Nevise Spell Checking Proccess Done. Inference time: {time_1 + time_2 + time_3} seconds. Outputs: (({corrected_text1}, {corrected_text2}, {corredcted_text3}))")
     
     return corrected_text1, corrected_text2, corrected_text3
 
