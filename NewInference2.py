@@ -162,7 +162,7 @@ def process_and_save(input_string, output_file="output.txt"):
 if __name__ == '__main__':
     import sys
     if len(sys.argv) != 2:
-        print("Usage: !python main.py on input_string)
+        print("((Usage: !python main.py on input_string))")
         sys.exit(1)
     
     input_string = sys.argv[1]
