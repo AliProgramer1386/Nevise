@@ -41,7 +41,7 @@ def load_spell_checker(vocab_path="model/vocab.pkl", model_checkpoint_path="mode
     return model, vocab, DEVICE, normalizer
 
 
-def correct_three_texts(model, vocab, device, normalizer, text1, text2, text3):
+def correct_three_texts(model, vocab, device, normalizer, text1):
     """
     Corrects the spelling of three input texts.
 
@@ -69,12 +69,12 @@ def correct_three_texts(model, vocab, device, normalizer, text1, text2, text3):
 
     # Correct each text
     corrected_text1, time_1 = spell_checking_on_sents(model, vocab, device, normalizer, text1)
-    corrected_text2, time_2 = spell_checking_on_sents(model, vocab, device, normalizer, text2)
-    corrected_text3, time_3 = spell_checking_on_sents(model, vocab, device, normalizer, text3)
+    ###corrected_text2, time_2 = spell_checking_on_sents(model, vocab, device, normalizer, text2)
+    ###corrected_text3, time_3 = spell_checking_on_sents(model, vocab, device, normalizer, text3)
 
-    print(f"Nevise Spell Checking Proccess Done. Inference time: {time_1 + time_2 + time_3} seconds. Outputs: (({corrected_text1}, {corrected_text2}, {corrected_text3}))")
+    print(f"Nevise Spell Checking Proccess Done. Inference time: {time_1} seconds. Output: (({corrected_text1}))")
     
-    return corrected_text1, corrected_text2, corrected_text3
+    return corrected_text1
 
 
 def model_inference(model, data, topk, DEVICE, BATCH_SIZE=16, vocab_=None):
