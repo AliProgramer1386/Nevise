@@ -63,14 +63,16 @@ def correct_three_texts(model, vocab, device, normalizer, text1, text2, text3):
         sents = [utils.space_special_chars(s) for s in sents]
         sents = list(filter(lambda txt: (txt != '' and txt != ' '), sents))
         test_data = [(normalizer.normalize(t), normalizer.normalize(t)) for t in sents]
-        greedy_results = model_inference(model, test_data, topk=1, DEVICE=device, BATCH_SIZE=1, vocab_=vocab)
+        greedy_results, inf_time = model_inference(model, test_data, topk=1, DEVICE=device, BATCH_SIZE=1, vocab_=vocab)
         corrected_text = ''.join([line['predicted'] + splitter for line, splitter in zip(greedy_results, splitters + ['\n'])])
-        return corrected_text
+        return corrected_text, inf_time
 
     # Correct each text
-    corrected_text1 = spell_checking_on_sents(model, vocab, device, normalizer, text1)
-    corrected_text2 = spell_checking_on_sents(model, vocab, device, normalizer, text2)
-    corrected_text3 = spell_checking_on_sents(model, vocab, device, normalizer, text3)
+    corrected_text1, time_1 = spell_checking_on_sents(model, vocab, device, normalizer, text1)
+    corrected_text2, time_2 = spell_checking_on_sents(model, vocab, device, normalizer, text2)
+    corrected_text3, time_3 = spell_checking_on_sents(model, vocab, device, normalizer, text3)
+
+    ptint(f"Nevise Spell Checking Proccess Done. Inference time: {time_1 + time_2 + time_3} seconds. Outputs: (({corrected_text1}, {corrected_text2}, {corredcted_text3}))")
     
     return corrected_text1, corrected_text2, corrected_text3
 
@@ -139,7 +141,7 @@ def model_inference(model, data, topk, DEVICE, BATCH_SIZE=16, vocab_=None):
     inf_time = time.time() - inference_st_time)
     ###print("###############################################")
     
-    return results
+    return results, inf_time
 
 
 def load_pretrained(model, checkpoint_path, optimizer=None, device='cuda'):
