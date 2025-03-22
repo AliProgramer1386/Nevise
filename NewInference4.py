@@ -81,7 +81,7 @@ def model_inference(model, data, topk, DEVICE, BATCH_SIZE=16, vocab_=None):
     """
     if vocab_ is not None:
         vocab = vocab_
-    print("###############################################")
+    ###print("###############################################")
     inference_st_time = time.time()
     _corr2corr, _corr2incorr, _incorr2corr, _incorr2incorr = 0, 0, 0, 0
     _mistakes = []
@@ -100,7 +100,7 @@ def model_inference(model, data, topk, DEVICE, BATCH_SIZE=16, vocab_=None):
         batch_labels_, batch_sentences_, batch_bert_inp, batch_bert_splits = bert_tokenize_for_valid_examples(batch_labels, batch_sentences)
         if len(batch_labels_) == 0:
             print("################")
-            print("Not predicting the following lines due to pre-processing mismatch: \n")
+            print("MISMATCH-ERR: Not predicting the following lines due to pre-processing mismatch: \n")
             print([(a, b) for a, b in zip(batch_labels, batch_sentences)])
             print("################")
             continue
@@ -135,9 +135,10 @@ def model_inference(model, data, topk, DEVICE, BATCH_SIZE=16, vocab_=None):
             results.append({"id": line_index + i, "original": a, "noised": b, "predicted": c, "topk": [], "topk_prediction_probs": [], "topk_reranker_losses": []})
         line_index += len(batch_clean_sentences)
 
-    print(f"\nEpoch {None} valid_loss: {valid_loss / (batch_id + 1)}")
-    print("total inference time for this data is: {:4f} secs".format(time.time() - inference_st_time))
-    print("###############################################")
+    ###print(f"\nEpoch {None} valid_loss: {valid_loss / (batch_id + 1)}")
+    inf_time = time.time() - inference_st_time)
+    ###print("###############################################")
+    
     return results
 
 
